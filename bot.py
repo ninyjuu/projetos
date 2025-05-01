@@ -1,45 +1,69 @@
 import discord
 from discord.ext import commands
 import requests
-from bs4 import BeautifulSoup  # Importação necessária para o scraping
+from bs4 import BeautifulSoup
+from datetime import datetime
 
-# Função para buscar os últimos resultados da FURIA na HLTV
+
+# Função para converter o timestamp Unix para formato de data
+def converter_timestamp_unix(timestamp):
+    return datetime.utcfromtimestamp(int(timestamp) / 1000).strftime('%d/%m/%Y %H:%M')
+
+# Função para obter os últimos resultados da FURIA
 def obter_ultimos_resultados_furia():
     url = "https://www.hltv.org/team/8297/furia#tab-matchesBox"
-    # Adicionando o cabeçalho User-Agent
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
     }
 
+    # Requisição à página
     response = requests.get(url, headers=headers)
     
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
-        
-        # Encontrando os resultados passados
-        results_section = soup.find_all('div', class_='match-block')
 
-        if results_section:
-            resultados = []
-            for match in results_section:
-                # Pegando informações do time e resultado
-                teams = match.find_all('div', class_='team')
-                result = match.find('div', class_='result')
+        # Encontrar as linhas de jogo
+        matches = soup.find_all('tr', class_='team-row')
+
+        resultados = []
+        for match in matches:
+            try:
+                # Data da partida
+                date = match.find('td', class_='date-cell').text.strip()
                 
-                if len(teams) == 2 and result:
-                    team_1 = teams[0].text.strip()
-                    team_2 = teams[1].text.strip()
-                    score = result.text.strip()
-                    resultados.append(f"{team_1} vs {team_2} - {score}")
-                    
-            if resultados:
-                return "\n".join(resultados)  # Retorna os últimos resultados encontrados
-            else:
-                return "Não foi possível encontrar os últimos resultados."
-        else:
-            return "Não há resultados disponíveis."
+                # Time da FURIA
+                team_furia = match.find('a', class_='team-name team-1').text.strip()
+                team_furia_logo = match.find('img', class_='team-logo')['src']
+                
+                # Time adversário
+                team_adversario = match.find('a', class_='team-name team-2').text.strip()
+                team_adversario_logo = match.find('img', class_='team-logo')['src']
+                
+                # Placar
+                scores = match.find_all('span', class_='score')
+                score_furia = scores[0].text.strip() if len(scores) > 0 else 'N/A'
+                score_adversario = scores[1].text.strip() if len(scores) > 1 else 'N/A'
+                
+                # Link para a página do jogo
+                match_link = match.find('a', class_='stats-button')['href']
+                
+                # Formatar os resultados para exibição
+                resultado = (f"Data: {date}\n"
+                             f"Time FURIA: {team_furia} - {team_furia_logo}\n"
+                             f"Time Adversário: {team_adversario} - {team_adversario_logo}\n"
+                             f"Placar: {score_furia} : {score_adversario}\n"
+                             f"Link para detalhes: https://www.hltv.org{match_link}\n"
+                             f"{'-' * 50}")
+                resultados.append(resultado)
+                
+            except Exception as e:
+                continue
+
+        return "\n".join(resultados) if resultados else "Não foi possível encontrar os últimos resultados."
+    
     else:
         return "Não foi possível acessar a página."
+
 
 def obter_torneio_atual_furia():
     url = "https://www.hltv.org/team/8297/furia#tab-matchesBox"
@@ -59,11 +83,6 @@ def obter_torneio_atual_furia():
     else:
         return "Não foi possível acessar a página."
     
-response = requests.get(url, headers=headers)
-print(response.status_code)
-print(response.text[:500])  # Mostra início do HTML retornado
-
-
 
 intents = discord.Intents.default()
 intents.message_content = True
