@@ -412,7 +412,6 @@ async def ranking(ctx):
     await ctx.send(f"O ranking atual da FURIA é:\n{ranking}")
 
 
-
 @bot.command(name='help')
 async def custom_help(ctx):
     ajuda = (
