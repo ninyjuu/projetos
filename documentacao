@@ -1,8 +1,9 @@
 Bot da FURIA CS:
-Este projeto é um bot para Discord criado para interagir com os fãs da FURIA, fornecendo informações sobre o time e seus resultados mais recentes. Ele foi desenvolvido para promover o engajamento da comunidade com o time de forma prática e interativa, utilizando tecnologias modernas e acessíveis.
+Este projeto é um bot para Discord criado para interagir com os fãs da FURIA, fornecendo informações sobre o time e seus resultados mais recentes. Ele foi
+desenvolvido para promover o engajamento da comunidade com o time de forma prática e interativa, utilizando tecnologias modernas e acessíveis.
 
   
-Sumário
+Sumário:
 1. Visão Geral
 2. Tecnologias Utilizadas
 3. Como Rodar o Projeto
@@ -14,8 +15,8 @@ Sumário
   
 Visão Geral:
 Este bot foi desenvolvido para os fãs do time FURIA CS, com o objetivo de fornecer atualizações e informações rápidas sobre o time, como resultados de jogos,
-torneios em andamento, e muito mais. O bot é integrado ao Discord e usa a API do Discord para enviar mensagens dinâmicas, além de integrar scraping para
-buscar dados em sites de esportes.
+elenco, e muito mais. O bot é integrado ao Discord e usa a API do Discord para enviar mensagens dinâmicas, além de integrar scraping para buscar dados
+em sites de esportes.
 
   
 Tecnologias Utilizadas:
@@ -62,7 +63,7 @@ python bot.py
 Comandos Disponíveis:
 Aqui estão alguns dos comandos que você pode usar no bot:
 !help: Exibe a lista de comandos possíveis.
-!projetos: Mostra o torneio em andamento e os detalhes da partida atual.
+!elenco: Mostra os participantes do time atual.
 !visaogeral: Fornece uma visão geral sobre o time FURIA, incluindo informações históricas e atuais.
 Esses comandos são fixos ou dinâmicos e podem ser atualizados conforme a necessidade para incluir novas funcionalidades.
 
