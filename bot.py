@@ -419,7 +419,7 @@ async def custom_help(ctx):
         "🔹 !visaogeral - Visão geral sobre a FURIA Esports.\n"
         "🔹 !membros - Lista atual dos jogadores da equipe de CS.\n"
         "🔹 !ultimosresultados - Mostra os últimos resultados da FURIA (dinâmico).\n"
-        "🔹 !torneioatual - Mostra o torneio atual da FURIA (dinâmico).\n"
+        "🔹 !ranking - Mostra o torneio atual da FURIA (dinâmico).\n"
         "🔹 !projetos - Fala sobre os projetos e iniciativas da FURIA.\n"
         "🔹 !redes - Mostra as redes sociais oficiais da FURIA.\n"
         "🔹 !mascote - Mostra o mascote da FURIA.\n"
