@@ -1,0 +1,86 @@
+Bot da FURIA CS:
+Este projeto é um bot para Discord criado para interagir com os fãs da FURIA, fornecendo informações sobre o time e seus resultados mais recentes. Ele foi desenvolvido para promover o engajamento da comunidade com o time de forma prática e interativa, utilizando tecnologias modernas e acessíveis.
+
+  
+Sumário
+1. Visão Geral
+2. Tecnologias Utilizadas
+3. Como Rodar o Projeto
+4. Comandos Disponíveis
+5. Configurações
+6. Contribuição
+7. Licença
+
+  
+Visão Geral:
+Este bot foi desenvolvido para os fãs do time FURIA CS, com o objetivo de fornecer atualizações e informações rápidas sobre o time, como resultados de jogos,
+torneios em andamento, e muito mais. O bot é integrado ao Discord e usa a API do Discord para enviar mensagens dinâmicas, além de integrar scraping para
+buscar dados em sites de esportes.
+
+  
+Tecnologias Utilizadas:
+- Python: A linguagem utilizada para desenvolvimento do bot.
+- discord.py: Biblioteca Python para interagir com a API do Discord.
+- BeautifulSoup: Biblioteca para fazer scraping de dados da web (para buscar resultados de jogos).
+- dotenv: Para carregar variáveis de ambiente, como o token do bot, de forma segura.
+- requests: Para realizar requisições HTTP e obter dados de páginas web.
+
+
+Como Rodar o Projeto:
+1. Clonando o Repositório:
+ Para começar, clone este repositório no seu computador utilizando o comando abaixo:
+
+ bash
+CopiarEditar
+git clone https://github.com/ninyjuu/projetos.git
+cd projetos
+
+2. Instalando as Dependências:
+ Utilize o pip para instalar todas as dependências do projeto:
+
+ bash
+CopiarEditar
+pip install -r requirements.txt
+
+3. Configurando o Token do Discord:
+ Crie um arquivo .env na raiz do projeto e insira seu Discord Token nele. O conteúdo do arquivo deve ser o seguinte:
+
+ env
+CopiarEditar
+DISCORD_TOKEN=seu_token_aqui
+ Nota: Não compartilhe seu token com ninguém! Ele deve ser mantido seguro.
+
+4. Rodando o Bot:
+ Para rodar o bot, execute o seguinte comando no terminal:
+
+ bash
+CopiarEditar
+python bot.py
+ O bot irá se conectar ao seu servidor Discord e estará pronto para interagir.
+
+
+Comandos Disponíveis:
+Aqui estão alguns dos comandos que você pode usar no bot:
+!help: Exibe a lista de comandos possíveis.
+!projetos: Mostra o torneio em andamento e os detalhes da partida atual.
+!visaogeral: Fornece uma visão geral sobre o time FURIA, incluindo informações históricas e atuais.
+Esses comandos são fixos ou dinâmicos e podem ser atualizados conforme a necessidade para incluir novas funcionalidades.
+
+  
+Configurações:
+Para alterar as configurações do bot, como adicionar mais comandos ou ajustar como ele interage com os usuários, basta modificar o arquivo bot.py.
+Algumas partes importantes incluem:
+- Token do Discord: O bot usa um token armazenado no arquivo .env para se autenticar com a API do Discord.
+- Scraping de Dados: As funções obter_ultimos_resultados_furia e obter_ranking_furia fazem scraping de sites para pegar resultados atualizados.
+
+
+Contribuição:
+Se você gostaria de contribuir para este projeto, siga as etapas abaixo:
+1. Faça um fork do repositório.
+2. Crie uma nova branch para suas mudanças.
+3. Faça as alterações e envie um pull request.
+4. Certifique-se de testar bem as mudanças antes de enviar.
+
+
+Licença:
+Este projeto é licenciado sob a MIT License- veja o arquivo LICENSE para mais detalhes.
