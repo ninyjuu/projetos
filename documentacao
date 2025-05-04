@@ -59,6 +59,8 @@ CopiarEditar
 python bot.py
  O bot irá se conectar ao seu servidor Discord e estará pronto para interagir.
 
+OU acesse https://discord.com/oauth2/authorize?client_id=1367156489155772528&permissions=8&integration_type=0&scope=bot para adicionar o Bot ao seu servidor no Discord.
+
 
 Comandos Disponíveis:
 Aqui estão alguns dos comandos que você pode usar no bot:
