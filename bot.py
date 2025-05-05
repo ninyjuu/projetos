@@ -138,7 +138,7 @@ A FURIA Esports tem como missão promover o crescimento do cenário de esports n
 
 @bot.command()
 async def mascote(ctx):
-    await ctx.send("Nosso mascote é o FURIA! 🦊")
+    await ctx.send("Nosso mascote é a Pantera Negra! <:Furia_Esports_logo:1368740797175955636>")
 
 @bot.command()
 async def membros(ctx):
