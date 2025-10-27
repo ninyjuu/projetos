@@ -1,0 +1,62 @@
+import pandas as pd
+import pyodbc
+
+
+NOME_ARQUIVO = 'input.csv' 
+
+SERVER = 'DESKTOP-0PQL0CO\SQLEXPRESS' 
+
+DATABASE = 'DBDesafioFullstack'
+
+ODBC_DRIVER = '{ODBC Driver 17 for SQL Server}' 
+
+CONN_STRING = (
+    f'DRIVER={ODBC_DRIVER};'
+    f'SERVER={SERVER};'
+    f'DATABASE={DATABASE};'
+    f'Trusted_Connection=yes;' 
+)
+
+
+def ingere_dados():
+    cnxn = None
+    try:
+        df = pd.read_csv(NOME_ARQUIVO, sep=',') 
+        print(f"Arquivo '{NOME_ARQUIVO}' lido com sucesso. Total de {len(df)} linhas.")
+
+        df['Data_Trade'] = pd.to_datetime(df['Data_Trade'], dayfirst=True).dt.strftime('%Y-%m-%d')
+        
+        cnxn = pyodbc.connect(CONN_STRING)
+        cursor = cnxn.cursor()
+        print("Conexão com SQL Server estabelecida.")
+
+        sql_insert = """
+            INSERT INTO Ordem (Data_Trade, Ativo, Quantidade, Emolumento)
+            VALUES (?, ?, ?, ?)
+        """
+        
+        dados_para_inserir = df[[
+            'Data_Trade', 
+            'Ativo', 
+            'Quantidade', 
+            'Emolumento' 
+        ]].values.tolist()
+
+        cursor.executemany(sql_insert, dados_para_inserir)
+        cnxn.commit() 
+        print(f"\n{len(dados_para_inserir)} ordens inseridas com sucesso na tabela Ordem.")
+
+    except pyodbc.Error as ex:
+        if cnxn:
+            cnxn.rollback()
+        print(f"ERRO SQL/Conexão. Detalhes: {ex.args[1]}")
+    except Exception as e:
+        print(f"ERRO Inesperado: {e}")
+    finally:
+        if cnxn:
+            cnxn.close()
+            print("Conexão fechada.")
+
+
+if __name__ == "__main__":
+    ingere_dados()
