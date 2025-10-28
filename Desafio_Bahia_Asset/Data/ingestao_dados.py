@@ -22,17 +22,13 @@ def ingere_dados():
 
         df.columns = df.columns.str.strip() 
         
-        # 1. CORREÇÃO: Trata a data
         df['Data_Trade'] = pd.to_datetime(df['Data_Trade'], dayfirst=True).dt.strftime('%Y-%m-%d')
         
-        # 2. CORREÇÃO: Trata os separadores decimais (Troca ',' por '.') e converte para float
         df['Quantidade'] = df['Quantidade'].astype(str).str.replace(',', '.', regex=False)
         df['Emolumento'] = df['Emolumento'].astype(str).str.replace(',', '.', regex=False)
         
-        # Remove linhas com valores nulos (que podem causar erro na conversão)
         df.dropna(subset=['Quantidade', 'Emolumento'], inplace=True)
         
-        # Converte para float (número decimal)
         df['Quantidade'] = df['Quantidade'].astype(float)
         df['Emolumento'] = df['Emolumento'].astype(float)
         

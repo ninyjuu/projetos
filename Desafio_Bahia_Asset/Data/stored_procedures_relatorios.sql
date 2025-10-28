@@ -1,9 +1,51 @@
--- Teste 1: Emolumentos Médios por Ativo
-EXEC sp_EmolumentosMediosPorAtivo;
+CREATE PROCEDURE sp_EmolumentosMediosPorAtivo
+AS
+BEGIN
+    SELECT
+        Ativo,
+        AVG(Emolumento) AS EmolumentoMedio
+    FROM
+        Ordem
+    GROUP BY
+        Ativo;
+END
+GO
 
--- Teste 2: Emolumentos Totais por Dia
-EXEC sp_EmolumentosTotaisPorDia;
 
--- Teste 3: Posição (Saldo)
--- ***ATENÇÃO: Use uma data que exista no seu input.csv (ex: '2025-09-30' ou '2025-09-27')
-EXEC sp_PosicaoPorAtivoEData @DataFinal = '2025-09-30';
+CREATE PROCEDURE sp_EmolumentosTotaisPorDia
+AS
+BEGIN
+    SELECT
+        Data_Trade,
+        SUM(Emolumento) AS EmolumentoTotal
+    FROM
+        Ordem
+    GROUP BY
+        Data_Trade
+    ORDER BY
+        Data_Trade;
+END
+GO
+
+
+CREATE PROCEDURE sp_PosicaoPorAtivoEData
+    @DataFinal DATE,
+    @Ativo VARCHAR(100) = NULL
+AS
+BEGIN
+    SELECT
+        Ativo,
+        SUM(Quantidade) AS PosicaoTotal
+    FROM
+        Ordem
+    WHERE
+        Data_Trade <= @DataFinal
+        AND (@Ativo IS NULL OR Ativo = @Ativo)
+    GROUP BY
+        Ativo
+    HAVING
+        SUM(Quantidade) <> 0
+    ORDER BY
+        Ativo;
+END
+GO
