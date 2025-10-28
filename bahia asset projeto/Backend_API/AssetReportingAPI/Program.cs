@@ -2,7 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Adiciona serviços ao contêiner.
 
-// 1. Configuração do CORS (DEVE VIR PRIMEIRO)
+// 1. Configuração do CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", builder => builder
@@ -25,7 +25,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// REMOVIDO: app.UseHttpsRedirection(); 
 
 // 2. Aplica a política CORS AQUI
 app.UseCors("CorsPolicy"); 
