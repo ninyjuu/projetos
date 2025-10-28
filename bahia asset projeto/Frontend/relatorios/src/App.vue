@@ -48,10 +48,8 @@ function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
 
-// NOVA FUNÇÃO: Formata a string YYYY-MM-DD para DD/MM/AAAA
 function formatDateForTitle(dateString) {
     if (!dateString) return '';
-    // Converte de YYYY-MM-DD para o objeto Date, e formata para pt-BR
     const parts = dateString.split('-');
     const date = new Date(parts[0], parts[1] - 1, parts[2]);
     return date.toLocaleDateString('pt-BR');
@@ -168,7 +166,6 @@ function formatCurrency(value, decimalPlaces = 2) {
 </template>
 
 <style scoped>
-/* CORES: Vermelho Escuro (#C0392B), Cinza Grafite (#333), Fundo (#F9F9F9) */
 .container { max-width: 1200px; margin: 0 auto; padding: 30px; font-family: 'Roboto', sans-serif; background-color: #f9f9f9; min-height: 100vh; }
 .main-header { padding-bottom: 15px; border-bottom: 3px solid #C0392B; margin-bottom: 30px; }
 h1 { color: #333; font-size: 2.2em; font-weight: 700; margin: 0; }
